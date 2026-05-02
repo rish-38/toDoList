@@ -16,22 +16,23 @@
     </div>
 
     <div class="canvas">
-        <% if(allNotes && allNotes.length > 0) { %>
+        <% if(allNotes.length > 0 ) { %>
 
-                <% allNotes.forEach((note, index)=> { %>
-                        <form action="/" method="post" class="note" id=`note-<%=index %>`>
-                            <input type='text' class="title" name="title" placeholder="Untitled" value="<%= note.title %>" >
-                        <a name="action" value="delete" class="icon delete"><i class="fa-solid fa-trash"></i></a>
-                            <textarea name="task" class="tasks" placeholder="What you wish to do :>" ><%= note.tasks %></textarea>
-                        </form>
-                    <% }) %>
-            </ul>
-            <% } else { %>
-                <p>No notes available. Add one above!</p>
-                <% } %>
+            <% allNotes.forEach((note, index )=> { %>
+                <form action="/delete" method="post" class="note" id="note-<%= index %>">
+                    <input type='text' class="title" placeholder="Untitled" name="title" value="<%=note.title %>">
+                    <button name="action" value="delete" class="icon delete" type="submit"><i class="fa-solid fa-trash"></i></button>
+                    <input type="text" name="postId" hidden value="<%=index%>">
+                    <textarea name="task" class="tasks"
+                        placeholder="What you wish to do :>"><%= note.tasks %></textarea>
+                </form>
+                <% }) %>
+                    <% } else { %>
+                        <p>No notes available. Add one above!</p>
+                        <% } %>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15/dist/Draggable.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.15"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15/dist/Draggable.min.js"></script>
     <script type="module" src="/deploy.js"></script>
 </body>
 
